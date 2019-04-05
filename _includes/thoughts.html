@@ -1,4 +1,4 @@
-<h2 {% if site.style == 'dark' %}class="text-white"{% endif %}>My Thoughts</h2>
+<h2 {% if site.style == 'dark' %}class="text-white"{% endif %}>My Articles</h2>
 <p class="f4 mb-4 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">Articles I've written.</p>
 <div class="d-sm-flex flex-wrap gutter-condensed mb-4">
   {% for post in site.posts limit: 6 %}
@@ -7,3 +7,30 @@
     </div>
   {% endfor %}
 </div>
+
+<h2>Contact me</h2>
+
+Fill this form and I'll email you back quickly.
+
+<form method="post" action="https://formspree.io/brendan.le-glaunec@epitech.eu">
+  <div class="wrapper">
+    <div class="input-wrapper">
+      <div class="input input-text">
+        <input type="text" name="name" id="name" placeholder="Name" />
+      </div>
+    </div>
+    <div class="input-wrapper">
+      <div class="input input-email">
+        <input type="email" name="_replyto" id="email" placeholder="Email" />
+      </div>
+    </div>
+    <div class="input-wrapper">
+      <div class="input input-message">
+        <textarea name="message" id="message" placeholder="Message" cols="30" rows="5"></textarea>
+      </div>
+      <button type="submit">
+        {% octicon arrow-right height:30 class:"mr-2 v-align-middle" fill:{{ icon_color }} aria-label:GitHub %}
+      </button>
+    </div>
+  </div>
+</form>
