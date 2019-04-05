@@ -64,6 +64,54 @@ body>div>div:nth-child(2) {
     margin-left: 25%;
 }
 
+// Evil Clippy
+
+.clippy {
+  position: fixed;
+  padding: 60px; // this makes clippy's hover hitbox bigger
+  bottom: -60px;
+  right: -20px;
+
+  transition: all 1s ease-in-out;
+
+  a {
+    display: block;
+    width: 100px;
+    height: 125px;
+    background: url("/assets/images/clippy.png");
+    background-size: cover;
+  }
+
+  img {
+    margin-left: -50px;
+  }
+}
+
+.clippy:hover {
+  bottom: -500px;
+}
+
+.clippy a:hover {
+  background: url("/assets/images/redclippy.png");
+  background-size: cover;
+}
+
+// Logos
+
+.logos {
+  list-style: none;
+
+  li {
+    transition: all 0.5s;
+    display: inline;
+    filter: grayscale(100%);
+  }
+}
+
+.logos li:hover {
+  filter: grayscale(0%);
+}
+
 // Color changes
 
 .bg-white {
@@ -203,6 +251,10 @@ $input-text-active: #BFD2FF;
       margin-left: 33% !important;
       max-width: 67% !important;
   }
+
+  .clippy {
+    display: none;
+  }
 }
 
 @media (max-width: 1012px) {
@@ -215,6 +267,18 @@ $input-text-active: #BFD2FF;
 @media (max-width: 768px) {
   body>div>div:nth-child(1) {
       position: relative;
+  }
+
+  body>div>div:nth-child(2) {
+      margin-left: 0 !important;
+      max-width: 100% !important;
+  }
+}
+
+@media (max-height: 860px) {
+  body>div>div:nth-child(1) {
+      position: relative;
+      height: auto;
   }
 
   body>div>div:nth-child(2) {
