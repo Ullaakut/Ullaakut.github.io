@@ -41,3 +41,173 @@
 .min-height-full {
   min-height: 100vh;
 }
+
+// Fix user info
+
+body>div>div:nth-child(1) {
+  position: fixed;
+  height: 100%;
+}
+
+body>div>div:nth-child(2) {
+    margin-left: 25%;
+}
+
+// Color changes
+
+.bg-white {
+  background-color: #1f262d !important;
+  color: #fff !important;
+}
+
+.text-gray {
+  color: #999 !important;
+}
+
+.link-gray {
+  color: #fff !important;
+}
+
+a {
+  color: #fff;
+}
+
+// Form
+input {
+  border-style: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+}
+
+button {
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column; //justify-content: center;
+  max-width: 1600px;
+  padding: 0 15px;
+  margin: 15px auto;
+}
+
+// colors
+$input-background: #1F262D;
+$input-text-inactive: #7881A1;
+$input-text-active: #BFD2FF;
+// gradient animation
+@keyframes gradient {
+  0% {
+      background-position: 0 0
+  }
+  100% {
+      background-position: 100% 0
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 400px;
+  margin: 10px 0;
+  border-radius: 2px;
+  padding: 1rem 1rem 1.2rem;
+  background: $input-background;
+  &:after {
+      content: "";
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      z-index: 999;
+      height: 2px;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+      background-position: 0% 0%;
+      background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+      background-size: 500% auto;
+      animation: gradient 3s linear infinite;
+  }
+}
+
+.input-wrapper input {
+  border-style: none;
+  background: transparent;
+  outline: none;
+  flex-grow: 1;
+  color: $input-text-active;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  vertical-align: middle;
+  &::-webkit-input-placeholder {
+      color: $input-text-inactive;
+  }
+}
+
+.input-wrapper textarea {
+  border-style: none;
+  background: transparent;
+  outline: none;
+  flex-grow: 1;
+  color: $input-text-active;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  resize: none;
+  vertical-align: middle;
+  &::-webkit-input-placeholder {
+      color: $input-text-inactive;
+  }
+}
+
+.input-wrapper button {
+  color: $input-text-inactive;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  vertical-align: middle;
+  transition: color .25s;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  &:hover {
+      color: $input-text-active;
+  }
+}
+
+@media (max-width: 1280px) {
+  body>div>div:nth-child(2) {
+      margin-left: 33% !important;
+      max-width: 67% !important;
+  }
+}
+
+@media (max-width: 1012px) {
+  body>div>div:nth-child(2) {
+      margin-left: 41.67% !important;
+      max-width: 59.33% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body>div>div:nth-child(1) {
+      position: relative;
+  }
+
+  body>div>div:nth-child(2) {
+      margin-left: 0 !important;
+      max-width: 100% !important;
+  }
+}
