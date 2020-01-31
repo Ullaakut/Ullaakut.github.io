@@ -21,11 +21,14 @@ projects:
   # sort_by options:
   #   - pushed
   #   - stars
-  limit: 9
+  limit: 18
   exclude:
     forks: false
     projects:
-    # - repo-name
+      - gonvey
+      - Bloggo
+      - 3BP
+      - IRC
 
 social_media:
   # behance: your_username
