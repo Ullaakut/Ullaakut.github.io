@@ -23,6 +23,7 @@ projects:
   #   - stars
   limit: 18
   exclude:
+    archived: false
     forks: false
     projects:
       - gonvey
