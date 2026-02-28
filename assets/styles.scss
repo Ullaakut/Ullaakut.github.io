@@ -53,15 +53,13 @@
   min-height: 100vh;
 }
 
-// Fix user info
+// Layout structure
 
-body>div>div:nth-child(1) {
-  position: fixed;
-  height: 100%;
-}
-
-body>div>div:nth-child(2) {
-    margin-left: 25%;
+.site-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 // Evil Clippy
@@ -247,42 +245,31 @@ $input-text-active: #BFD2FF;
 }
 
 @media (max-width: 1280px) {
-  body>div>div:nth-child(2) {
-      margin-left: 33% !important;
-      max-width: 67% !important;
-  }
-
   .clippy {
     display: none;
   }
 }
 
 @media (max-width: 1012px) {
-  body>div>div:nth-child(2) {
-      margin-left: 41.67% !important;
-      max-width: 59.33% !important;
+  .site-sidebar {
+      position: relative;
+      height: auto;
+      overflow-y: visible;
   }
 }
 
 @media (max-width: 768px) {
-  body>div>div:nth-child(1) {
+  .site-sidebar {
       position: relative;
-  }
-
-  body>div>div:nth-child(2) {
-      margin-left: 0 !important;
-      max-width: 100% !important;
+      height: auto;
+      overflow-y: visible;
   }
 }
 
 @media (max-height: 860px) {
-  body>div>div:nth-child(1) {
+  .site-sidebar {
       position: relative;
       height: auto;
-  }
-
-  body>div>div:nth-child(2) {
-      margin-left: 0 !important;
-      max-width: 100% !important;
+      overflow-y: visible;
   }
 }
