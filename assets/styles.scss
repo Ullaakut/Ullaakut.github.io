@@ -62,38 +62,6 @@
   overflow-y: auto;
 }
 
-// Evil Clippy
-
-.clippy {
-  position: fixed;
-  padding: 60px; // this makes clippy's hover hitbox bigger
-  bottom: -60px;
-  right: -20px;
-
-  transition: all 1s ease-in-out;
-
-  a {
-    display: block;
-    width: 100px;
-    height: 125px;
-    background: url("/assets/images/clippy.png");
-    background-size: cover;
-  }
-
-  img {
-    margin-left: -50px;
-  }
-}
-
-.clippy:hover {
-  bottom: -500px;
-}
-
-.clippy a:hover {
-  background: url("/assets/images/redclippy.png");
-  background-size: cover;
-}
-
 // Logos
 
 .logos {
@@ -241,12 +209,6 @@ $input-text-active: #BFD2FF;
   right: 5px;
   &:hover {
       color: $input-text-active;
-  }
-}
-
-@media (max-width: 1280px) {
-  .clippy {
-    display: none;
   }
 }
 
