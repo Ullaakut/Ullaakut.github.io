@@ -63,15 +63,15 @@
             <div class="d-flex flex-wrap">
             {% if featured_repository.name == 'cameradar' %}
               <a href="{{ featured_repository.html_url }}/tags" class="mr-2 mb-2" aria-label="{{ featured_repository.name }} latest version">
-                <img alt="{{ featured_repository.name }} latest version" src="https://img.shields.io/github/v/tag/Ullaakut/cameradar?sort=semver" />
+                <img alt="{{ featured_repository.name }} latest version" src="https://img.shields.io/github/v/tag/Ullaakut/cameradar" />
               </a>
             {% else %}
               <a href="{{ featured_repository.html_url }}/releases" class="mr-2 mb-2" aria-label="{{ featured_repository.name }} latest release">
-                <img alt="{{ featured_repository.name }} latest release" src="https://img.shields.io/github/v/release/Ullaakut/{{ featured_repository.name }}?display_name=tag&sort=semver" />
+                <img alt="{{ featured_repository.name }} latest release" src="https://img.shields.io/github/v/release/Ullaakut/{{ featured_repository.name }}" />
               </a>
             {% endif %}
             <a href="{{ featured_repository.html_url }}/commits/{{ featured_repository.default_branch }}" class="mb-2" aria-label="{{ featured_repository.name }} last commit">
-              <img alt="{{ featured_repository.name }} last commit" src="https://img.shields.io/github/last-commit/Ullaakut/{{ featured_repository.name }}/{{ featured_repository.default_branch }}" />
+              <img alt="{{ featured_repository.name }} last commit" src="https://img.shields.io/github/last-commit/Ullaakut/{{ featured_repository.name }}" />
             </a>
             </div>
           </div>
