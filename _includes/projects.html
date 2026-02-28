@@ -18,14 +18,13 @@
 {% endif %}
 
 {% assign featured_repo_names = "nmap,masscan,cameradar" | split: "," %}
+{% assign featured_repos = filtered_repos | where_exp: "repo", "featured_repo_names contains repo.name" | sort: "stargazers_count" | reverse %}
 
 <h3 class="h4 mb-2 {% if site.style == 'dark' %}text-white{% endif %}">Featured Projects</h3>
 <p class="mb-3 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">My core work in Go network scanning and camera security research.</p>
 <div class="d-sm-flex flex-wrap gutter-condensed mb-5">
-  {% for featured_name in featured_repo_names %}
-    {% assign featured_repository = filtered_repos | where: 'name', featured_name | first %}
-    {% if featured_repository %}
-      <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
+  {% for featured_repository in featured_repos %}
+    <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
         <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
           <div class="flex-auto">
             <h4 class="f4 lh-condensed mb-2"><a href="{{ featured_repository.html_url }}">{{ featured_repository.name }}</a></h4>
@@ -77,7 +76,6 @@
           </div>
         </div>
       </div>
-    {% endif %}
   {% endfor %}
 </div>
 
