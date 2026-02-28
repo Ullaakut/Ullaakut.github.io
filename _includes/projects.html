@@ -18,14 +18,15 @@
 {% endif %}
 
 {% assign featured_repo_names = "nmap,masscan,cameradar,gorsair,astronomer,camerattack,rtspallthethings,traefik" | split: "," %}
-{% assign featured_repos = filtered_repos | where_exp: "repo", "featured_repo_names contains repo.name and repo.name != 'traefik'" | sort: "stargazers_count" | reverse %}
+{% assign starred_repos = filtered_repos | sort: "stargazers_count" | reverse %}
 {% assign trailing_featured_repos = filtered_repos | where: "name", "traefik" %}
 
 <h3 class="h4 mb-2 {% if site.style == 'dark' %}text-white{% endif %}">My Repositories</h3>
 <p class="mb-3 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">Go security tooling, camera research projects, and core OSS contributions.</p>
 <div class="d-sm-flex flex-wrap gutter-condensed mb-5">
-  {% for featured_repository in featured_repos %}
-    <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
+  {% for featured_repository in starred_repos %}
+    {% if featured_repo_names contains featured_repository.name and featured_repository.name != 'traefik' %}
+      <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
         <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
           <div class="flex-auto">
             <h4 class="f4 lh-condensed mb-2"><a href="{{ featured_repository.html_url }}">{{ featured_repository.name }}</a></h4>
@@ -85,6 +86,7 @@
           </div>
         </div>
       </div>
+      {% endif %}
   {% endfor %}
 
     {% for featured_repository in trailing_featured_repos %}
