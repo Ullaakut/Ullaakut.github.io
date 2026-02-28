@@ -1,76 +1,95 @@
 <h2 {% if site.style == 'dark' %}class="text-white"{% endif %}>My Projects</h2>
 <p class="f4 mb-4 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">Security-focused Go libraries, bindings, and tooling that I actively maintain.</p>
 
+{% if site.projects.sort_by == 'stars' %}
+  {% assign sort_order = 'stargazers_count', 'last' %}
+{% else %}
+  {% assign sort_order = 'pushed_at' %}
+{% endif %}
+
+{% if site.projects.exclude.archived && site.projects.exclude.forks %}
+  {% assign filtered_repos = site.github.public_repositories | where:'archived', false | where:'fork', false | sort: sort_order | reverse %}
+{% elsif site.projects.exclude.archived %}
+  {% assign filtered_repos = site.github.public_repositories | where:'archived', false | sort: sort_order | reverse %}
+{% elsif site.projects.exclude.forks %}
+  {% assign filtered_repos = site.github.public_repositories | where:'fork', false | sort: sort_order | reverse %}
+{% else %}
+  {% assign filtered_repos = site.github.public_repositories | sort: sort_order | reverse %}
+{% endif %}
+
+{% assign featured_repo_names = "nmap,masscan,cameradar" | split: "," %}
+
 <h3 class="h4 mb-2 {% if site.style == 'dark' %}text-white{% endif %}">Featured Projects</h3>
 <p class="mb-3 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">My core work in Go network scanning and camera security research.</p>
 <div class="d-sm-flex flex-wrap gutter-condensed mb-5">
-  <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
-    <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
-      <h4 class="f4 lh-condensed mb-2"><a href="https://github.com/Ullaakut/nmap">nmap</a></h4>
-      <p class="text-gray mb-2">Go bindings for Nmap focused on ergonomic scan parsing and automation.</p>
-      <div class="d-flex flex-wrap">
-        <a href="https://github.com/Ullaakut/nmap/releases" class="mr-2 mb-2" aria-label="nmap latest release">
-          <img alt="nmap latest release" src="https://img.shields.io/github/v/release/Ullaakut/nmap?display_name=tag&sort=semver" />
-        </a>
-        <a href="https://github.com/Ullaakut/nmap/commits" class="mb-2" aria-label="nmap last commit">
-          <img alt="nmap last commit" src="https://img.shields.io/github/last-commit/Ullaakut/nmap" />
-        </a>
+  {% for featured_name in featured_repo_names %}
+    {% assign featured_repository = filtered_repos | where: 'name', featured_name | first %}
+    {% if featured_repository %}
+      <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
+        <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
+          <div class="flex-auto">
+            <h4 class="f4 lh-condensed mb-2"><a href="{{ featured_repository.html_url }}">{{ featured_repository.name }}</a></h4>
+
+            {% case featured_repository.name %}
+            {% when 'nmap' %}
+              <p class="text-gray mb-2">Go bindings for Nmap focused on ergonomic scan parsing and automation.</p>
+            {% when 'masscan' %}
+              <p class="text-gray mb-2">Go bindings for Masscan to integrate high-speed discovery into Go workflows.</p>
+            {% when 'cameradar' %}
+              <p class="text-gray mb-2">Toolkit and library for discovering, auditing, and securing RTSP camera streams.</p>
+            {% else %}
+              <p class="text-gray mb-2">Security-focused project with practical tooling for network and camera assessment.</p>
+            {% endcase %}
+
+            <div class="d-flex f6 mb-3">
+              {% if featured_repository.language %}
+                  <span class="mr-3" itemprop="programmingLanguage">{{ featured_repository.language }}</span>
+              {% endif %}
+              {% if featured_repository.stargazers_count %}
+                <a href="{{ featured_repository.html_url }}/stargazers" class="d-inline-block link-gray mr-4">
+                  <svg class="octicon octicon-star mr-1" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true" fill="#ffffff"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"></path></svg>{{ featured_repository.stargazers_count }}
+                </a>
+              {% endif %}
+              {% if featured_repository.forks_count %}
+                <a href="{{ featured_repository.html_url }}/network/members" class="d-inline-block link-gray mr-4">
+                  <svg class="octicon octicon-git-branch mr-1" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true" fill="#ffffff"><path fill-rule="evenodd" d="M10 5c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v.3c-.02.52-.23.98-.63 1.38-.4.4-.86.61-1.38.63-.83.02-1.48.16-2 .45V4.72a1.993 1.993 0 0 0-1-3.72C.88 1 0 1.89 0 3a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2 1.11 0 2-.89 2-2 0-.53-.2-1-.53-1.36.09-.06.48-.41.59-.47.25-.11.56-.17.94-.17 1.05-.05 1.95-.45 2.75-1.25S8.95 7.77 9 6.73h-.02C9.59 6.37 10 5.73 10 5zM2 1.8c.66 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2C1.35 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2zm0 12.41c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm6-8c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>{{ featured_repository.forks_count }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap mt-auto pt-1">
+            {% if featured_repository.name == 'cameradar' %}
+              <a href="{{ featured_repository.html_url }}/tags" class="mr-2 mb-2" aria-label="{{ featured_repository.name }} latest version">
+                <img alt="{{ featured_repository.name }} latest version" src="https://img.shields.io/github/v/tag/Ullaakut/cameradar?sort=semver" />
+              </a>
+            {% else %}
+              <a href="{{ featured_repository.html_url }}/releases" class="mr-2 mb-2" aria-label="{{ featured_repository.name }} latest release">
+                <img alt="{{ featured_repository.name }} latest release" src="https://img.shields.io/github/v/release/Ullaakut/{{ featured_repository.name }}?display_name=tag&sort=semver" />
+              </a>
+            {% endif %}
+            <a href="{{ featured_repository.html_url }}/commits/{{ featured_repository.default_branch }}" class="mb-2" aria-label="{{ featured_repository.name }} last commit">
+              <img alt="{{ featured_repository.name }} last commit" src="https://img.shields.io/github/last-commit/Ullaakut/{{ featured_repository.name }}/{{ featured_repository.default_branch }}" />
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
-    <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
-      <h4 class="f4 lh-condensed mb-2"><a href="https://github.com/Ullaakut/masscan">masscan</a></h4>
-      <p class="text-gray mb-2">Go bindings for Masscan to integrate high-speed discovery into Go workflows.</p>
-      <div class="d-flex flex-wrap">
-        <a href="https://github.com/Ullaakut/masscan/releases" class="mr-2 mb-2" aria-label="masscan latest release">
-          <img alt="masscan latest release" src="https://img.shields.io/github/v/release/Ullaakut/masscan?display_name=tag&sort=semver" />
-        </a>
-        <a href="https://github.com/Ullaakut/masscan/commits" class="mb-2" aria-label="masscan last commit">
-          <img alt="masscan last commit" src="https://img.shields.io/github/last-commit/Ullaakut/masscan" />
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
-    <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
-      <h4 class="f4 lh-condensed mb-2"><a href="https://github.com/Ullaakut/cameradar">cameradar</a></h4>
-      <p class="text-gray mb-2">Toolkit and library for discovering, auditing, and securing RTSP camera streams.</p>
-      <div class="d-flex flex-wrap">
-        <a href="https://github.com/Ullaakut/cameradar/releases" class="mr-2 mb-2" aria-label="cameradar latest release">
-          <img alt="cameradar latest release" src="https://img.shields.io/github/v/release/Ullaakut/cameradar?display_name=tag&sort=semver" />
-        </a>
-        <a href="https://github.com/Ullaakut/cameradar/commits" class="mb-2" aria-label="cameradar last commit">
-          <img alt="cameradar last commit" src="https://img.shields.io/github/last-commit/Ullaakut/cameradar" />
-        </a>
-      </div>
-    </div>
-  </div>
+    {% endif %}
+  {% endfor %}
 </div>
 
 <h3 class="h4 mb-2 {% if site.style == 'dark' %}text-white{% endif %}">All Repositories</h3>
 <div class="d-sm-flex flex-wrap gutter-condensed mb-4">
-  {% if site.projects.sort_by == 'stars' %}
-    {% assign sort_order = 'stargazers_count', 'last' %}
-  {% else %}
-    {% assign sort_order = 'pushed_at' %}
-  {% endif %}
-
-  {% if site.projects.exclude.archived && site.projects.exclude.forks %}
-    {% assign filtered_repos = site.github.public_repositories | where:'archived', false | where:'fork', false | sort: sort_order | reverse %}
-  {% elsif site.projects.exclude.archived %}
-    {% assign filtered_repos = site.github.public_repositories | where:'archived', false | sort: sort_order | reverse %}
-  {% elsif site.projects.exclude.forks %}
-    {% assign filtered_repos = site.github.public_repositories | where:'fork', false | sort: sort_order | reverse %}
-  {% else %}
-    {% assign filtered_repos = site.github.public_repositories | sort: sort_order | reverse %}
-  {% endif %}
-
-  {% for repository in filtered_repos | limit: site.projects.limit %}
-    {% unless site.projects.exclude.projects contains repository.name %}
+  {% assign rendered_count = 0 %}
+  {% for repository in filtered_repos %}
+    {% unless site.projects.exclude.projects contains repository.name or featured_repo_names contains repository.name %}
       <div class="col-sm-6 col-md-12 col-lg-6 col-xl-4 mb-3">
         {% include repo-card.html %}
       </div>
+      {% assign rendered_count = rendered_count | plus: 1 %}
+      {% if rendered_count >= site.projects.limit %}
+        {% break %}
+      {% endif %}
     {% endunless %}
   {% endfor %}
 </div>
