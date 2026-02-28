@@ -1,5 +1,54 @@
 <h2 {% if site.style == 'dark' %}class="text-white"{% endif %}>My Projects</h2>
-<p class="f4 mb-4 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">GitHub repositories that I've built.</p>
+<p class="f4 mb-4 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">Security-focused Go libraries, bindings, and tooling that I actively maintain.</p>
+
+<h3 class="h4 mb-2 {% if site.style == 'dark' %}text-white{% endif %}">Featured Projects</h3>
+<p class="mb-3 {% if site.style == 'dark' %}text-white{% else %}text-gray{% endif %}">My core work in Go network scanning and camera security research.</p>
+<div class="d-sm-flex flex-wrap gutter-condensed mb-5">
+  <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
+    <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
+      <h4 class="f4 lh-condensed mb-2"><a href="https://github.com/Ullaakut/nmap">nmap</a></h4>
+      <p class="text-gray mb-2">Go bindings for Nmap focused on ergonomic scan parsing and automation.</p>
+      <div class="d-flex flex-wrap">
+        <a href="https://github.com/Ullaakut/nmap/releases" class="mr-2 mb-2" aria-label="nmap latest release">
+          <img alt="nmap latest release" src="https://img.shields.io/github/v/release/Ullaakut/nmap?display_name=tag&sort=semver" />
+        </a>
+        <a href="https://github.com/Ullaakut/nmap/commits" class="mb-2" aria-label="nmap last commit">
+          <img alt="nmap last commit" src="https://img.shields.io/github/last-commit/Ullaakut/nmap" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
+    <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
+      <h4 class="f4 lh-condensed mb-2"><a href="https://github.com/Ullaakut/masscan">masscan</a></h4>
+      <p class="text-gray mb-2">Go bindings for Masscan to integrate high-speed discovery into Go workflows.</p>
+      <div class="d-flex flex-wrap">
+        <a href="https://github.com/Ullaakut/masscan/releases" class="mr-2 mb-2" aria-label="masscan latest release">
+          <img alt="masscan latest release" src="https://img.shields.io/github/v/release/Ullaakut/masscan?display_name=tag&sort=semver" />
+        </a>
+        <a href="https://github.com/Ullaakut/masscan/commits" class="mb-2" aria-label="masscan last commit">
+          <img alt="masscan last commit" src="https://img.shields.io/github/last-commit/Ullaakut/masscan" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-12 col-lg-4 mb-3">
+    <div class="github-component d-flex flex-column height-full text-left {% if site.style == 'dark' %}box-shadow{% else %}border border-gray-light{% endif %} bg-white rounded-1 p-3">
+      <h4 class="f4 lh-condensed mb-2"><a href="https://github.com/Ullaakut/cameradar">cameradar</a></h4>
+      <p class="text-gray mb-2">Toolkit and library for discovering, auditing, and securing RTSP camera streams.</p>
+      <div class="d-flex flex-wrap">
+        <a href="https://github.com/Ullaakut/cameradar/releases" class="mr-2 mb-2" aria-label="cameradar latest release">
+          <img alt="cameradar latest release" src="https://img.shields.io/github/v/release/Ullaakut/cameradar?display_name=tag&sort=semver" />
+        </a>
+        <a href="https://github.com/Ullaakut/cameradar/commits" class="mb-2" aria-label="cameradar last commit">
+          <img alt="cameradar last commit" src="https://img.shields.io/github/last-commit/Ullaakut/cameradar" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="h4 mb-2 {% if site.style == 'dark' %}text-white{% endif %}">All Repositories</h3>
 <div class="d-sm-flex flex-wrap gutter-condensed mb-4">
   {% if site.projects.sort_by == 'stars' %}
     {% assign sort_order = 'stargazers_count', 'last' %}
