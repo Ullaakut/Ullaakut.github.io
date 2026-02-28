@@ -41,7 +41,10 @@
               <p class="text-gray mb-2">Security-focused project with practical tooling for network and camera assessment.</p>
             {% endcase %}
 
-            <div class="d-flex f6 mb-3">
+          </div>
+
+          <div class="mt-auto pt-1">
+            <div class="d-flex f6 mb-2">
               {% if featured_repository.language %}
                   <span class="mr-3" itemprop="programmingLanguage">{{ featured_repository.language }}</span>
               {% endif %}
@@ -56,9 +59,8 @@
                 </a>
               {% endif %}
             </div>
-          </div>
 
-          <div class="d-flex flex-wrap mt-auto pt-1">
+            <div class="d-flex flex-wrap">
             {% if featured_repository.name == 'cameradar' %}
               <a href="{{ featured_repository.html_url }}/tags" class="mr-2 mb-2" aria-label="{{ featured_repository.name }} latest version">
                 <img alt="{{ featured_repository.name }} latest version" src="https://img.shields.io/github/v/tag/Ullaakut/cameradar?sort=semver" />
@@ -71,6 +73,7 @@
             <a href="{{ featured_repository.html_url }}/commits/{{ featured_repository.default_branch }}" class="mb-2" aria-label="{{ featured_repository.name }} last commit">
               <img alt="{{ featured_repository.name }} last commit" src="https://img.shields.io/github/last-commit/Ullaakut/{{ featured_repository.name }}/{{ featured_repository.default_branch }}" />
             </a>
+            </div>
           </div>
         </div>
       </div>
